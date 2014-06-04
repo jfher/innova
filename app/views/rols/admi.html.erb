@@ -1,20 +1,21 @@
-  <center><h1><b> Admin view</b></h1></center> 
-<a href= "<%= create_user_path %>" class="btn btn-success"><b>Create User</b></a>
+  <center><h1><b> Administracion de Cuentas </b></h1></center> 
+<a href= "/users/create_user" class="btn btn-success active"><b>Crear Cuenta</b></a>
 
-
-<h1><b>USERS</b></h1>
+<h1><b>Cuentas</b></h1>
       <table class="table table-striped"><thead>
           <tr class="info">
-          <td><b>#User</b></td>
-          <th></th>
+       
           <td><b>Email</b></td>
-          <td><b>Role</b></td>
-          <td><b>Created At</b></td>
-          <td><b>Updated At</b></td>
-          <td><b>State</b></td>
-          <td><b>Options</b></td>
+          <th></th>
+          <td><b>Rol</b></td>
+          <td><b>Creado</b></td>
+          <td></td>
+          <td><b>Asignar Rol</b></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><b align ="center">Opciones</b></td>
 
-            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -24,21 +25,45 @@
         <tbody>
           <tr>
           <% @users.each do |user| %>
-          <% if user.id != 1 %>
           <tr>
-              <td><%= user.id %></td><td>
+            <%@a = Rol.find(user.rol_id)%>
               <td><%= user.email %></td> 
-              <td><%= user.role %></td> 
+              <td></td>
+              <td><%= @a.name%></td> 
               <td><%= user.created_at %></td>
-              <td><%= user.updated_at %></td>
-              <% if user.state == true %>
-              <td>Unlocked</td>
-              <% else %>
-              <td>Locked</td>
-              <% end %>  
-              <% end %>
+
+            <% if user.rol_id == 1 %>
+              <td><h5><a href= "<%=role_jefe_path(user.id) %>"class="btn btn-info"><b>Jefe</b></h5></a></td>  
+              <td><h5><a href= "<%=role_miembro_path(user.id) %>"class="btn btn-default"><b>Miembro</b></h5></a></td> 
+              <td><h5><a href= "<%=role_organizador_path(user.id) %>"class="btn btn-primary"><b>Organizador</b></h5></a></td>  
+            <%end%>
+
+            <% if user.rol_id == nil %> 
+              <td><h5><a href= "<%=role_jefe_path(user.id) %>"class="btn btn-info"><b>Jefe</b></h5></a></td>  
+              <td><h5><a href= "<%=role_miembro_path(user.id) %>"class="btn btn-default"><b>Miembro</b></h5></a></td> 
+              <td><h5><a href= "<%=role_organizador_path(user.id) %>"class="btn btn-primary"><b>Organizador</b></h5></a></td>  
+            <%end%>
+
+            <% if user.rol_id == 2 %>
+              <td><h5><a disabled href= "<%=role_jefe_path(user.id) %>"class="btn btn-info"><b>Jefe</b></h5></a></td>  
+              <td><h5><a href= "<%=role_miembro_path(user.id) %>"class="btn btn-default"><b>Miembro</b></h5></a></td> 
+              <td><h5><a href= "<%=role_organizador_path(user.id) %>"class="btn btn-primary"><b>Organizador</b></h5></a></td>  
+            <%end%>
+            <% if user.rol_id == 3%>
+              <td><h5><a href= "<%=role_jefe_path(user.id) %>"class="btn btn-info"><b>Jefe</b></h5></a></td>  
+              <td><h5><a disabled href= "<%=role_miembro_path(user.id) %>"class="btn btn-default"><b>Miembro</b></h5></a></td> 
+              <td><h5><a href= "<%=role_organizador_path(user.id) %>"class="btn btn-primary"><b>Organizador</b></h5></a></td>  
+            <%end%>
+            <% if user.rol_id == 4%> 
+              <td><h5><a href= "<%=role_jefe_path(user.id) %>"class="btn btn-info"><b>Jefe</b></h5></a></td>  
+              <td><h5><a href= "<%=role_miembro_path(user.id) %>"class="btn btn-default"><b>Miembro</b></h5></a></td> 
+              <td><h5><a disabled href= "<%=role_organizador_path(user.id) %>"class="btn btn-primary"><b>Organizador</b></h5></a></td>  
+            <%end%>
+              <td></td>
+              <td></td> 
+              <td><h5><a href= "/users/remove/<%=user.id%>" class="btn btn-danger"><b>Eliminar</b></h5></a></td>
+              <td><h5><a href= "/users/edit_user/<%=user.id%>" class="btn btn-warning"><b>Editar</b></h5></a></td>  
             </tr>
           <% end %>
         </tbody>
       </table>
-    

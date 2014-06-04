@@ -1,16 +1,26 @@
 class RolsController < ApplicationController
   before_action :set_rol, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   # GET /rols
   # GET /rols.json
   def index
-   # if user_signed_in? && role == "admin"
-    #  redirect_to '/admi'
-   # @rols = Rol.all
-    
-    #else 
-        @rols = Rol.all
-    #end
+    if user_signed_in? && current_user.rol_id == 1
+      redirect_to '/admi'
+       @users = User.all
+    else
+      if  user_signed_in?
+         redirect_to '/home'
+      end
+    end
+  end
+
+  def home
+    if current_user.rol_id != 1
+      @users = User.all
+    else
+      redirect_to '/'
+    end
   end
 
   # GET /rols/1
@@ -26,9 +36,63 @@ class RolsController < ApplicationController
   # GET /rols/1/edit
   def edit
   end
+  
+
+  def role_admi
+    @user=User.find(params[:id])
+    @user.rol_id = 1
+    @user.save
+    redirect_to :back
+  end
+
+  def role_jefe
+    @user=User.find(params[:id])
+    @user.rol_id = 2
+    @user.save
+    redirect_to :back
+  end
+
+  def role_miembro
+    @user=User.find(params[:id])
+    @user.rol_id = 3
+    @user.save
+    redirect_to :back
+  end
+
+  def role_organizador
+    @user=User.find(params[:id])
+    @user.rol_id = 4
+    @user.save
+    redirect_to :back
+  end
 
   def admi
-    @users= User.all
+     @users = User.all
+  end
+
+  def remove
+    @user=User.find(params[:id])
+    @user.destroy
+    redirect_to :back
+  end
+
+  def save
+      @users=User.all
+      @user=User.new
+      @user.email=params[:email]
+      @user.password=params[:password]
+      @user.rol_id = 3
+      @users.each do |user|
+       if @user.email == user.email
+        create_user
+       end
+      end
+      @user.save
+      redirect_to '/'
+  end
+
+  def edit_user
+    @user=User.find(params[:id])
   end
 
   def create_user

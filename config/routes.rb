@@ -2,13 +2,25 @@ Innova::Application.routes.draw do
   #devise_for :users
   devise_for :users do
     get '/users/sign_out' => 'devise/sessions#destroy'
-   end
+  end
 
   resources :rols
 
-  get '/admi' => 'rols#admi'
-  get '/users/create_user' => 'rols#create_user', :as => 'create_user'
+  post '/user/save' => 'rols#save'
+  get '/users/create_user' => 'rols#create_user'
+  get '/users/remove/:id' => 'rols#remove'
+  post '/user' => 'users#create'
+  get '/users/edit_user/:id' => 'rols#edit_user'
+  get '/admi/user/role_admi/:id' => 'rols#role_admi', :as => 'role_admi'
+  get '/admi/user/role_jefe/:id' => 'rols#role_jefe', :as => 'role_jefe'
+  get '/admi/user/role_miembro/:id' => 'rols#role_miembro', :as => 'role_miembro'
+  get '/admi/user/role_organizador/:id' => 'rols#role_organizador', :as => 'role_organizador'
 
+  get '/home' => 'rols#home'
+  get '/admi' => 'rols#admi'
+  get '/about_us' => 'rols#about'
+  get '/contact_us' => 'rols#contact'
+  root 'rols#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -35,7 +47,6 @@ Innova::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
- root 'rols#index'
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
