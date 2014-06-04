@@ -6,6 +6,8 @@ Innova::Application.routes.draw do
 
   resources :rols
 
+  get '/admi' => 'rols#admi'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

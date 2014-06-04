@@ -1,0 +1,44 @@
+  <center><h1><b> Admin view</b></h1></center> 
+<a href= "/users/create_user" class="btn btn-success"><b>Create User</b></a>
+
+
+<h1><b>USERS</b></h1>
+      <table class="table table-striped"><thead>
+          <tr class="info">
+          <td><b>#User</b></td>
+          <th></th>
+          <td><b>Email</b></td>
+          <td><b>Role</b></td>
+          <td><b>Created At</b></td>
+          <td><b>Updated At</b></td>
+          <td><b>State</b></td>
+          <td><b>Options</b></td>
+
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          <% @users.each do |user| %>
+          <% if user.id != 1 %>
+          <tr>
+              <td><%= user.id %></td><td>
+              <td><%= user.email %></td> 
+              <td><%= user.role %></td> 
+              <td><%= user.created_at %></td>
+              <td><%= user.updated_at %></td>
+              <% if user.state == true %>
+              <td>Unlocked</td>
+              <% else %>
+              <td>Locked</td>
+              <% end %>  
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    

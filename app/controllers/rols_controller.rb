@@ -4,7 +4,13 @@ class RolsController < ApplicationController
   # GET /rols
   # GET /rols.json
   def index
-    @rols = Rol.all
+   # if user_signed_in? && role == "admin"
+    #  redirect_to '/admi'
+   # @rols = Rol.all
+    
+    #else 
+        @rols = Rol.all
+    #end
   end
 
   # GET /rols/1
@@ -20,6 +26,17 @@ class RolsController < ApplicationController
   # GET /rols/1/edit
   def edit
   end
+
+  def admi
+    @users= User.all
+    @thermostats = Thermostat.all
+
+   end
+
+  def create_user
+    @user=User.new
+  end
+
 
   # POST /rols
   # POST /rols.json
