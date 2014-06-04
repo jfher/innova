@@ -38,7 +38,7 @@
             <% if user_signed_in? %>
               <p> Signed in as <%= current_user.email %>. Not you?</p> 
               <li class="">
-                <%= link_to "Sign out", destroy_user_session_path,:method => :delete%>                  
+               <%= link_to('Sign out', '/users/sign_out', :method => :delete) %>                  
               </li>
             <% else %>
               <li><a href="/users/sign_in">Ingresar</a></li>
