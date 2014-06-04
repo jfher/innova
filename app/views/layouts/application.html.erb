@@ -36,9 +36,10 @@
           
           <ul class="nav navbar-nav navbar-right">        
             <% if user_signed_in? %>
-              <p> Signed in as <%= current_user.email %>. Not you?</p> 
+            <p><font color ="Gray">  Sesion Iniciada como <%= current_user.email %>. No eres tu?</font></p> 
               <li class="">
-               <%= link_to('Sign out', '/users/sign_out', :method => :delete) %>                  
+                
+               <%= link_to('Cerrar Sesion', '/users/sign_out', :method => :delete) %>         
               </li>
             <% else %>
               <li><a href="/users/sign_in">Ingresar</a></li>

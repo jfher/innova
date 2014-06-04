@@ -29,14 +29,11 @@ class RolsController < ApplicationController
 
   def admi
     @users= User.all
-    @thermostats = Thermostat.all
-
-   end
+  end
 
   def create_user
     @user=User.new
   end
-
 
   # POST /rols
   # POST /rols.json

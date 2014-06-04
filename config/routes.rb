@@ -7,6 +7,7 @@ Innova::Application.routes.draw do
   resources :rols
 
   get '/admi' => 'rols#admi'
+  get '/users/create_user' => 'rols#create_user', :as => 'create_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
