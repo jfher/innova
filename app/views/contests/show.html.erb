@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contest.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @contest.category %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @contest.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @contest.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_contest_path(@contest), :class => "btn btn-default"  %> |
+<a href= "/organizer" class = "btn btn-default">Back </a>

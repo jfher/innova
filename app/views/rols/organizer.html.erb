@@ -1,0 +1,89 @@
+  <center><h1><b> Organizador </b></h1></center> 
+<a href= "/contests/new" class="btn btn-success active"><b>Crear Concurso</b></a>
+<a href= "/events/new" class="btn btn-success active"><b>Crear Evento</b></a>
+
+<h1><b>Concursos</b></h1>
+      <table class="table table-striped"><thead>
+          <tr class="info">
+       
+          <td><b>Nombre de Concurso</b></td>
+          <th></th>
+          <td><b>Fecha de Inicio</b></td>
+          <td><b>Fecha Final</b></td>
+          <td></td>
+          <td><b>Categoria</b></td>
+          <td></td>
+          <td></td>
+          <td><b align ="center">Opciones</b></td>
+
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          <% @contests.each do |contest| %>
+          <tr>
+              <td><%= contest.name %></td> 
+              <td></td>
+              <td><%= contest.start_date %></td> 
+              <td><%= contest.end_date %></td>
+              <td></td>
+              <td><%= contest.category %></td>
+            
+              <td></td> 
+              <td></td> 
+
+              <td><a href= "/contests/destroy/<%=contest.id%>" class="btn btn-danger"><b>Eliminar</b></a></td>
+              <td><%= link_to 'Editar', edit_contest_path(contest), :class => "btn btn-warning" %></td>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+
+<h1><b>Eventos</b></h1>
+      <table class="table table-striped"><thead>
+          <tr class="info">
+       
+          <td><b>Nombre de Evento</b></td>
+          <th></th>
+          <td><b>Nombre de Patrocinador</b></td>
+          <td><b>Fecha de Inicio</b></td>
+          <td><b>Fecha Final</b></td>
+          <td></td>
+          <td><b>Estado</b></td>
+          <td></td>
+          <td></td>
+          <td><b align ="center">Opciones</b></td>
+
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          <% @events.each do |event| %>
+          <tr>
+              <td><%= event.name %></td> 
+              <td></td>
+              <td><%= event.name_of_sponsor %></td>
+              <td><%= event.start_date %></td> 
+              <td><%= event.end_date %></td>
+              <td></td>
+              <td><%= event.state %></td>
+            
+              <td></td> 
+              <td></td> 
+
+              <td><a href= "/events/destroy/<%=event.id%>" class="btn btn-danger"><b>Eliminar</b></a></td>
+              <td><%= link_to 'Editar', edit_event_path(event), :class => "btn btn-warning" %></td>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+

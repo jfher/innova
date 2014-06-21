@@ -9,7 +9,9 @@ class RolsController < ApplicationController
       redirect_to '/admi'
        @users = User.all
     else
-      if  user_signed_in?
+       if  user_signed_in? &&  current_user.rol_id == 4
+         redirect_to '/organizer'
+      elsif   user_signed_in?
          redirect_to '/home'
       end
     end
@@ -68,6 +70,11 @@ class RolsController < ApplicationController
 
   def admi
      @users = User.all
+  end
+
+  def organizer
+    @contests = Contest.all 
+    @events = Event.all
   end
 
   def remove
