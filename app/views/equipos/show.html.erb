@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+<a href= "<%= new_proyecto_path %>"  class="btn btn-success active"><b>Crear Proyecto</b></a>
+<p>
+  <strong>Nombre:</strong>
+  <%= @equipo.name %>
+</p>
+
+<center><h1><b> Miembros del Equipo </b></h1></center>
+
+
+  <table class="table table-striped "><thead>
+      <tr class="info">
+        <th>Nombre(s)</th>
+        <th>Apeliidos</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @equipo.users.each do |user| %>
+        <tr>
+        	
+             <td><%= user.name %></td>
+             <td><%= user.lastname %></td>
+             <td><%= user.email %></td>
+             <% @rols = Rol.find_by(id: user.rol_id) %>
+             <td><%= @rols.name %></td>
+           
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <br>
+
+
+  <h1><b>Proyectos</b></h1>
+      <table class="table table-striped"><thead>
+          <tr class="info">
+       
+          <td><b>Nombre del Proyecto</b></td>
+          <th></th>
+          <td><b>Proyecto Activo</b></td>
+          <td></td>
+          <td><b align ="center">Opciones</b></td>
+
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          <% @proyectos.each do |proyecto| %>
+          <tr>
+            <% if proyecto.equipo_id == @equipo.id %>
+              <td><%= proyecto.name %></td> 
+              <td></td>
+              <td><%= proyecto.state %></td> 
+            
+              <td></td> 
+              <td></td> 
+              <td><a href="<%= proyecto_path (proyecto.id) %>" class="btn btn-default">Ver</a></td>
+               <td><a href="<%= edit_proyecto_path(proyecto) %>" class="btn btn-default">Editar</a></td>
+               <td><a href="/proyectos/destroy/<%= proyecto.id %>" class="btn btn-danger">Eliminar</a></td>
+              <%end%>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+
+<br>
+<br>
+
+<%= link_to 'Edit', edit_equipo_path(@equipo) %> |
+<%= link_to 'Back', equipos_path %>

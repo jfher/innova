@@ -68,13 +68,40 @@ class RolsController < ApplicationController
     redirect_to :back
   end
 
+  def team
+    @user = User.find(params[:id])
+    @user.equipo_id = params[:idteam]
+    @user.save
+    redirect_to :back
+  end
+
+  def noteam
+    @user = User.find(params[:id])
+    @user.equipo_id = nil
+    @user.save
+    redirect_to :back
+  end
+
   def admi
+    if current_user.rol_id == 1
      @users = User.all
+   else
+    redirect_to '/'
+   end
   end
 
   def organizer
-    @contests = Contest.all 
-    @events = Event.all
+    if current_user.rol_id == 3
+      @contests = Contest.all 
+      @events = Event.all
+    else
+      redirect_to '/'
+    end
+  end
+
+  def boss
+    @users = User.all
+    @equipos = Equipo.all
   end
 
   def remove
@@ -88,6 +115,9 @@ class RolsController < ApplicationController
       @user=User.new
       @user.email=params[:email]
       @user.password=params[:password]
+      @user.name = params[:name]
+      @user.lastname = params[:lastname]
+      @user.telf = params[:telf]
       @user.rol_id = 3
       @users.each do |user|
        if @user.email == user.email

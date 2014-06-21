@@ -1,4 +1,8 @@
 Innova::Application.routes.draw do
+  resources :proyectos
+
+  resources :equipos
+
   resources :events
 
   resources :contests
@@ -25,7 +29,7 @@ Innova::Application.routes.draw do
   get '/about_us' => 'rols#about'
   get '/contact_us' => 'rols#contact'
   root 'rols#index'
-
+  get '/boss' => 'rols#boss'
   post '/contest/save' => 'contests#save'
   get '/contests/new' => 'contests#new'
   get '/contests/destroy/:id' => 'contests#destroy'
@@ -33,7 +37,7 @@ Innova::Application.routes.draw do
   get '/contests/edit_contest/:id' => 'contests#edit_contest'
 
   get '/organizer' => 'rols#organizer'
-
+  
   post '/event/save' => 'event#save'
   get '/events/new' => 'events#new'
   get '/events/destroy/:id' => 'events#destroy'
@@ -41,9 +45,11 @@ Innova::Application.routes.draw do
   get '/events/edit_event/:id' => 'events#edit_event'
 
 
-
-  
-
+  get '/equipo/new/:id' => 'equipos#new'
+  get '/equipos/destroy/:id' => 'equipos#destroy'
+  get '/user/:id/add/:idteam' => 'rols#team'
+  get '/user/:id/sub/:idteam' => 'rols#noteam'
+  get '/proyectos/new/:id' => 'proyectos#new'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

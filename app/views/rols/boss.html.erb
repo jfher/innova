@@ -1,0 +1,88 @@
+  <center><h1><b> Jefe </b></h1></center>
+
+<%if current_user.equipo_id == nil%>
+    <a href= "/equipo/new/<%=current_user.id%>"  class="btn btn-success active"><b>Crear Equipo</b></a>
+
+<%else%>
+    <a disabled href= "/equipo/new/<%=current_user.id%>"  class="btn btn-success active"><b>Crear Equipo</b></a>
+<%end%>
+
+<h1><b>Equipo</b></h1>
+      <table class="table table-striped"><thead>
+          <tr class="info">
+       
+          <td><b>Nombre del Equipo</b></td>
+          <th></th>
+          <td></td>
+          <td><b align ="center">Opciones</b></td>
+
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          <% @equipos.each do |equipo| %>
+          <tr>
+            <%if equipo.user_id == current_user.id%>
+              <td><%= equipo.name %></td> 
+              <td></td>
+            
+              <td></td> 
+              <td></td> 
+
+               <td><a href="<%= equipo_path (equipo.id) %>" class="btn btn-default">Ver</a></td>
+               <td><a href="<%= edit_equipo_path(equipo) %>" class="btn btn-default">Editar</a></td>
+               <td><a href="/equipos/destroy/<%= equipo.id %>" class="btn btn-danger">Eliminar</a></td>
+
+              
+<h3><b>Miembros</b></h3>
+      <table class="table table-striped"><thead>
+          <tr class="info">
+       
+          <td><b>Nombre</b></td>
+          <th></th>
+          <td><b>Apellido</b></td>
+          <td><b>Email</b></td>
+          <td></td>
+          <td><b align ="center">Opciones</b></td>
+
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          <% @users.each do |user| %>
+          <tr>
+            <%if user.rol_id == 3  || user.rol_id == 2%>
+              <td><%= user.name %></td> 
+              <td></td>
+              <td><%= user.lastname %></td>
+              <td><%= user.email %></td> 
+              <td></td> 
+              <td></td>
+              <% if user.equipo_id == nil %>
+                  <td><a href="/user/<%=user.id%>/add/<%=equipo.id%>" class="btn btn-default">Añadir a Equipo</a></td>
+                  <td><a disabled href="/user/<%=user.id%>/sub/<%=equipo.id%>" class="btn btn-default">Retirar de Equipo</a></td>
+              <%else%>
+                  <td><a disabled href="/user/<%=user.id%>/add/<%=equipo.id%>" class="btn btn-default">Añadir a Equipo</a></td>
+                  <td><a href="/user/<%=user.id%>/sub/<%=equipo.id%>" class="btn btn-default">Retirar de Equipo</a></td>
+
+              <%end%>
+            <%end%>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+            <%end%>
+            <%end%>            
+            </tr>
+        </tbody>
+      </table>
+
+
+

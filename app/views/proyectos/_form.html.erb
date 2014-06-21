@@ -1,0 +1,33 @@
+
+<%= form_for(@proyecto) do |f| %>
+  <% if @proyecto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proyecto.errors.count, "error") %> prohibited this proyecto from being saved:</h2>
+
+      <ul>
+      <% @proyecto.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br>
+    <%= f.check_box :state %>
+  </div>
+    <%= f.hidden_field :id %>
+
+   <div class="text_info">
+          <%= f.label :'Elija el equipo al que va asociar el proyecto'%><br>
+          <%= f.collection_select(:equipo_id, Equipo.where(:user_id => current_user.id), :id, :name, {:required => "required"}, :class => "textboxgrade" ) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

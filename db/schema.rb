@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619220233) do
+ActiveRecord::Schema.define(version: 20140621180218) do
 
   create_table "contests", force: true do |t|
     t.string   "name"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20140619220233) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "equipos", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "equipos", ["user_id"], name: "index_equipos_on_user_id"
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -34,6 +43,16 @@ ActiveRecord::Schema.define(version: 20140619220233) do
   end
 
   add_index "events", ["contest_id"], name: "index_events_on_contest_id"
+
+  create_table "proyectos", force: true do |t|
+    t.string   "name"
+    t.boolean  "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "equipo_id"
+  end
+
+  add_index "proyectos", ["equipo_id"], name: "index_proyectos_on_equipo_id"
 
   create_table "rols", force: true do |t|
     t.string   "name"
@@ -55,9 +74,14 @@ ActiveRecord::Schema.define(version: 20140619220233) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rol_id"
+    t.string   "name"
+    t.string   "lastname"
+    t.integer  "telf"
+    t.integer  "equipo_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["equipo_id"], name: "index_users_on_equipo_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["rol_id"], name: "index_users_on_rol_id"
 
